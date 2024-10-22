@@ -9,8 +9,15 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let input = prompt("Rock, paper, or scissors? ");
+    let input = prompt("rock, paper, or scissors? ");
     return input.toLowerCase();
+}
+
+function playGame() {
+    for (let i = 0; i < 5; i++){
+        playRound();
+        console.log(`The score is Computer: ${computerScore} - Human: ${humanScore}`);
+    }
 }
 
 function playRound(computerChoice = getComputerChoice(),humanChoice = getHumanChoice()){
@@ -31,8 +38,6 @@ function playRound(computerChoice = getComputerChoice(),humanChoice = getHumanCh
     else {
         console.log('It\'s a tie!');
     }
-    
-
 }
 
-playRound();
+playGame();
