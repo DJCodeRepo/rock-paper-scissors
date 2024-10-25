@@ -8,36 +8,35 @@ function getComputerChoice() {
     return "scissors";
 }
 
-function getHumanChoice() {
-    let input = prompt("rock, paper, or scissors? ");
-    return input.toLowerCase();
-}
-
-function playGame() {
-    for (let i = 0; i < 5; i++){
-        playRound();
-        console.log(`The score is Computer: ${computerScore} - Human: ${humanScore}`);
-    }
-}
-
-function playRound(computerChoice = getComputerChoice(),humanChoice = getHumanChoice()){
-    console.log(computerChoice);
-    console.log(humanChoice);
+function playRound(e){
+    const humanChoice = e.target.textContent.toLowerCase();
+    const computerChoice = getComputerChoice();
+    let scores = document.createElement("p");
+    let roundResult = document.createElement("p");
     if ((computerChoice === "rock" && humanChoice === "scissors") ||
         (computerChoice === "scissors" && humanChoice === "paper") ||
         (computerChoice === "paper" && humanChoice === "rock")) {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`)
+        roundResult.textContent = `You lose! ${computerChoice} beats ${humanChoice}.`;
         computerScore++;
     }
     else if ((computerChoice === "rock" && humanChoice === "paper") ||
         (computerChoice === "scissors" && humanChoice === "rock") ||
         (computerChoice === "paper" && humanChoice === "scissors")) {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`)
+        roundResult.textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
         humanScore++;
     }
     else {
-        console.log('It\'s a tie!');
+        roundResult.textContent = `It\'s a tie! Both chose ${humanChoice}.`;
     }
+    scores.textContent = `Player: ${humanScore} - Computer: ${computerScore}`;
+    scoreboard.appendChild(roundResult);
+    scoreboard.appendChild(scores);
 }
 
-playGame();
+const buttonContainer = document.querySelector(".userChoiceDiv");
+const playerScoreboard = document.querySelector(".playerScore");
+const computerScoreboard = document.querySelector(".computerScore");
+const scoreboard = document.querySelector(".scoreboard");
+
+
+buttonContainer.addEventListener("click", playRound);
