@@ -29,8 +29,20 @@ function playRound(e){
         roundResult.textContent = `It\'s a tie! Both chose ${humanChoice}.`;
     }
     scores.textContent = `Player: ${humanScore} - Computer: ${computerScore}`;
-    scoreboard.appendChild(roundResult);
-    scoreboard.appendChild(scores);
+    scoreboard.replaceChildren(scores, roundResult);
+    let winMessage = document.createElement("p");
+    if (computerScore == 5){
+        winMessage.textContent = `The computer wins! Better luck next time.`;
+        computerScore = 0;
+        humanScore = 0;
+        scoreboard.appendChild(winMessage);
+    }
+    else if (humanScore == 5){
+        winMessage.textContent = `Congratulations! You've won this game!`;
+        computerScore = 0;
+        humanScore = 0;
+        scoreboard.appendChild(winMessage);
+    }
 }
 
 const buttonContainer = document.querySelector(".userChoiceDiv");
